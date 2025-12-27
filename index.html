@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mohd Badar Ansari | Portfolio</title>
+    
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary-color: #0ea5e9;
+            --secondary-color: #0284c7;
+            --bg-dark: #070b14;
+            --bg-card: rgba(30, 41, 59, 0.6);
+            --text-light: #f1f5f9;
+            --text-gray: #94a3b8;
+            --linkedin-blue: #0077b5;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            overflow-x: hidden;
+        }
+
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            background-color: var(--bg-dark);
+        }
+
+        .container { max-width: 1100px; margin: 0 auto; padding: 0 20px; }
+
+        header {
+            background: rgba(7, 11, 20, 0.7);
+            backdrop-filter: blur(15px);
+            padding: 15px 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+
+        nav { display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.5rem; font-weight: bold; color: var(--primary-color); }
+        .nav-links { display: flex; align-items: center; }
+        .nav-links a { margin-left: 25px; font-weight: 500; text-decoration: none; color: inherit; transition: 0.3s; }
+        .nav-links a:hover { color: var(--primary-color); text-shadow: 0 0 10px var(--primary-color); }
+
+        .hero { height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; }
+        
+        /* Attractive Name Styling */
+        .hero h1 { 
+            font-size: 4.5rem; 
+            font-weight: 900; 
+            letter-spacing: -1.5px;
+            margin-bottom: 15px;
+        }
+        .hero h1 span.gradient-name {
+            background: linear-gradient(to right, #ffffff, var(--primary-color), #ffffff);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+            filter: drop-shadow(0 0 8px rgba(14, 165, 233, 0.3));
+            animation: shine 4s linear infinite;
+        }
+        @keyframes shine {
+            to { background-position: 200% center; }
+        }
+
+        .typing-text { font-size: 1.5rem; color: var(--text-gray); min-height: 1.6em; }
+
+        .btn {
+            margin: 10px;
+            background: var(--primary-color);
+            color: white;
+            padding: 15px 35px;
+            border-radius: 50px;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            transition: 0.4s;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 4px 15px rgba(14, 165, 233, 0.3);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            border: 2px solid var(--linkedin-blue);
+            color: var(--linkedin-blue);
+            box-shadow: none;
+        }
+
+        .btn:hover { transform: scale(1.05) translateY(-3px); box-shadow: 0 8px 30px rgba(14, 165, 233, 0.6); }
+        .btn-secondary:hover { background: var(--linkedin-blue); color: white; }
+
+        section { padding: 100px 0; }
+        h2 { font-size: 2.5rem; text-align: center; margin-bottom: 60px; }
+
+        .card {
+            background: var(--bg-card);
+            backdrop-filter: blur(8px);
+            padding: 30px;
+            border-radius: 15px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        /* --- EXPERIENCE TIMELINE --- */
+        .timeline { max-width: 900px; margin: 0 auto; position: relative; }
+        .timeline-item {
+            margin-bottom: 40px;
+            padding-left: 30px;
+            border-left: 2px solid var(--primary-color);
+            position: relative;
+        }
+        .timeline-item::before {
+            content: ''; position: absolute; width: 16px; height: 16px;
+            background: var(--primary-color); border-radius: 50%; left: -9px; top: 5px;
+            box-shadow: 0 0 10px var(--primary-color);
+        }
+
+        .exp-header { display: flex; justify-content: space-between; margin-bottom: 10px; }
+        .exp-role { font-size: 1.25rem; font-weight: bold; color: var(--primary-color); }
+        .exp-date { color: var(--text-gray); font-style: italic; font-size: 0.9rem; }
+        .exp-company { font-weight: 600; margin-bottom: 10px; display: block; color: var(--text-light); }
+        .timeline-item ul { padding-left: 20px; color: var(--text-gray); }
+        .timeline-item li { margin-bottom: 8px; font-size: 0.95rem; }
+
+        /* --- PROJECTS --- */
+        .project-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; }
+        .tech-stack { color: var(--primary-color); font-size: 0.8rem; margin-top: 15px; font-weight: bold; letter-spacing: 1px; }
+
+        /* --- EDUCATION --- */
+        .edu-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+        .edu-card h4 { color: var(--primary-color); margin-bottom: 5px; }
+
+        footer { text-align: center; padding: 50px; color: var(--text-gray); border-top: 1px solid rgba(255,255,255,0.05); }
+
+        @media (max-width: 768px) { 
+            .hero h1 { font-size: 2.8rem; } 
+            .exp-header { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="particles-js"></div>
+
+    <header>
+        <div class="container">
+            <nav>
+                <div class="logo">BADAR ANSARI</div>
+                <div class="nav-links">
+                    <a href="#about">About</a>
+                    <a href="#experience">Experience</a>
+                    <a href="#projects">Projects</a>
+                    <a href="#education">Education</a>
+                    <a href="#contact">Contact</a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div data-aos="zoom-in">
+            <h1><span class="gradient-name">Mohd Badar Ansari</span></h1>
+            <div class="typing-text"><span id="typed"></span></div>
+            <div class="hero-btns" style="margin-top: 30px;">
+                <a href="https://mail.google.com/mail/?view=cm&fs=1&to=mohdbadar106@gmail.com" target="_blank" class="btn">Hire Me</a>
+                <a href="https://linkedin.com/in/mohd-badar-ansari" target="_blank" class="btn btn-secondary"><i class="fa-brands fa-linkedin"></i> LinkedIn</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="container">
+        <h2 data-aos="fade-up">About Me</h2>
+        <div class="card" data-aos="fade-up" style="max-width: 850px; margin: 0 auto; line-height: 1.8;">
+            <p>ATS-optimized <strong>Software Developer and RPA Specialist</strong> with hands-on experience in Python, Automation Anywhere, and Machine Learning. I specialize in automating business processes to reduce manual effort and building full-stack applications using Flask and MySQL</p>
+        </div>
+    </section>
+
+    <section id="experience" class="container">
+        <h2 data-aos="fade-up">Professional Journey</h2>
+        <div class="timeline">
+            
+            <div class="timeline-item card" data-aos="fade-left">
+                <div class="exp-header">
+                    <span class="exp-role">Associate Analyst</span>
+                    <span class="exp-date">Feb 2025 - Dec 2025</span>
+                </div>
+                <span class="exp-company">GlobalLogic, Gurgaon </span>
+                <ul>
+                    <li>Performed data analysis and fashion fit recognition using Google Crowd Compute Tool.</li>
+                    <li>Created interactive Power BI dashboards to visualize trends and managed structured datasets.</li>
+                    <li>Improved reporting efficiency through database operations and automation.</li>
+                </ul>
+            </div>
+
+            <div class="timeline-item card" data-aos="fade-left" data-aos-delay="100">
+                <div class="exp-header">
+                    <span class="exp-role">RPA Intern</span>
+                    <span class="exp-date">Sep 2024 - Jan 2025</span>
+                </div>
+                <span class="exp-company">Warp-Velocity Technology (Remote) </span>
+                <ul>
+                    <li>Developed Automation Anywhere bots for data extraction and automated reporting.</li>
+                    <li>Reduced manual business process effort by approximately 40%.</li>
+                    <li>Implemented robust error handling and debugging for stable bot execution.</li>
+                </ul>
+            </div>
+
+            <div class="timeline-item card" data-aos="fade-left" data-aos-delay="200">
+                <div class="exp-header">
+                    <span class="exp-role">Python Intern</span>
+                    <span class="exp-date">Apr 2024 - Oct 2024</span>
+                </div>
+                <span class="exp-company">The Developers Arena (Remote) </span>
+                <ul>
+                    <li>Built Python automation scripts for data processing and API integration.</li>
+                    <li>Performed data cleaning and transformation using Pandas and NumPy.</li>
+                    <li>Followed Agile and SDLC best practices to develop reusable OOP modules.</li>
+                </ul>
+            </div>
+
+            <div class="timeline-item card" data-aos="fade-left" data-aos-delay="300">
+                <div class="exp-header">
+                    <span class="exp-role">Executive Assistant</span>
+                    <span class="exp-date">Nov 2018 - Jul 2019</span>
+                </div>
+                <span class="exp-company">EXL Service, Gurgaon </span>
+                <ul>
+                    <li>Processed airline ticket refunds using Amadeus GDS system.</li>
+                    <li>Maintained transaction accuracy and followed operational workflows.</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <section id="projects" class="container">
+        <h2 data-aos="fade-up">Technical Projects</h2>
+        <div class="project-grid">
+            <div class="card" data-aos="fade-up">
+                <h3>Car Price Prediction</h3>
+                <p>Developed ML models using Linear Regression, Random Forest, and SVM. Achieved high accuracy via hyperparameter tuning.</p>
+                <div class="tech-stack">PYTHON • SCKIT-LEARN • PANDAS • NUMPY </div>
+            </div>
+            <div class="card" data-aos="fade-up" data-aos-delay="100">
+                <h3>Grocery Web App</h3>
+                <p>Full-stack application featuring user authentication, CRUD operations, and database optimization.</p>
+                <div class="tech-stack">FLASK • MYSQL • HTML/CSS • JS </div>
+            </div>
+            <div class="card" data-aos="fade-up" data-aos-delay="200">
+                <h3>RPA Automation Bots</h3>
+                <p>Automated flight price comparison and product data extraction, significantly improving operational efficiency.</p>
+                <div class="tech-stack">AUTOMATION ANYWHERE • EXCEL • WEB SCRAPING </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="education" class="container">
+        <h2 data-aos="fade-up">Education</h2>
+        <div class="edu-grid">
+            <div class="card edu-card" data-aos="zoom-in">
+                <h4>MCA</h4>
+                <p>Jamia Hamdard University </p>
+                <span class="exp-date">2022 - 2024 </span>
+            </div>
+            <div class="card edu-card" data-aos="zoom-in" data-aos-delay="100">
+                <h4>BCA</h4>
+                <p>Rama Institute of Higher Education </p>
+                <span class="exp-date">2019 - 2022 </span>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="container" style="text-align: center;">
+        <h2 data-aos="fade-up">Get In Touch</h2>
+        <div class="card" data-aos="zoom-in" style="max-width: 600px; margin: 0 auto;">
+            <p style="font-size: 1.2rem; color: var(--primary-color); margin-bottom: 20px;">mohdbadar106@gmail.com </p>
+            <div style="display: flex; justify-content: center; gap: 15px; flex-wrap: wrap;">
+                <a href="https://mail.google.com/mail/?view=cm&fs=1&to=mohdbadar106@gmail.com" target="_blank" class="btn">
+                    <i class="fa-solid fa-envelope"></i> Send Email
+                </a>
+                <a href="https://linkedin.com/in/mohd-badar-ansari" target="_blank" class="btn btn-secondary">
+                    <i class="fa-brands fa-linkedin"></i> LinkedIn
+                </a>
+            </div>
+            <div style="margin-top: 25px; font-size: 0.9rem; color: var(--text-gray);">
+                📍 New Delhi, India  | 📞 +91-8279379537
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 Mohd Badar Ansari | RPA & Software Developer Portfolio</p>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.12"></script>
+    
+    <script>
+        AOS.init({ duration: 1000, once: true });
+
+        new Typed('#typed', {
+            strings: ['Software Developer', 'RPA Specialist', 'Python Developer', 'Data Analyst'],
+            typeSpeed: 50, backSpeed: 30, loop: true
+        });
+
+        particlesJS("particles-js", {
+            "particles": {
+                "number": { "value": 80, "density": { "enable": true, "value_area": 800 } },
+                "color": { "value": "#0ea5e9" },
+                "opacity": { "value": 0.3 },
+                "size": { "value": 3, "random": true },
+                "line_linked": { "enable": true, "distance": 150, "color": "#0ea5e9", "opacity": 0.2, "width": 1 },
+                "move": { "enable": true, "speed": 2 }
+            },
+            "interactivity": {
+                "events": { "onhover": { "enable": true, "mode": "grab" }, "onclick": { "enable": true, "mode": "push" } }
+            }
+        });
+    </script>
+</body>
+</html>
